@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+<div class="container">
+
+  <hr class="col-md-12">
+    <h2>BooksList</h2>
+  <hr>
+  <p></p>
+    <ul class="list-group">
+    <li class="list-group-item disabled">Books</li>
+    {% for book in books %}
+        <li class="list-group-item"><a href="/{{ user.id }}">
+        "{{ book.name }}" {{ book.author }}
+        <br>
+    {% endfor %}
+    </ul>
+
+</div>
+
+{% endblock %}

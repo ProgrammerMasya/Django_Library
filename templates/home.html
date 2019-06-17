@@ -12,17 +12,37 @@
     <ul class="list-group">
     <li class="list-group-item disabled">Users</li>
     {% for user in users %}
-        <li class="list-group-item"><a href="/lib/{{ user.id }}">
+        <li class="list-group-item">
         {% if user.get_full_name %}
             {{ user.get_full_name }}
         {% else %}
             {{ user.username }}
         {% endif %}
-        </a></li>
         <br>
     {% endfor %}
     </ul>
-  </div>
+  <div class="card-body" style="align-items: center; justify-content: center; display: flex;">
+        <form method="post" action="">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="exampleInputEmail1">Username</label>
+            {{ user_form.username }}
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">First name</label>
+            {{ user_form.first_name }}
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Last name</label>
+            {{ user_form.last_name }}
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            {{ user_form.password }}
+          </div>
+          <input type="submit" class="btn btn-primary" style="margin:20px 120px" >
+        </form>
+      </div>
 </div>
 
 {% endblock %}

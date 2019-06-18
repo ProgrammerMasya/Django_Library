@@ -5,18 +5,9 @@
 <div class="container">
 
   <hr class="col-md-12">
-    <h2>BooksList</h2>
+    <h2>Edit Book</h2>
   <hr>
   <p></p>
-    <ul class="list-group">
-    <li class="list-group-item disabled">{{user.username}} Books</li>
-    {% for book in books %}
-        <li class="list-group-item"><a href="{{ book.get_absolute_url }}">
-        "{{ book.name }}" {{ book.author }}
-        <br>
-        </a>
-    {% endfor %}
-    </ul>
 
     <div class="card-body" style="align-items: center; justify-content: center; display: flex;">
     <form method="post" action="">
@@ -29,8 +20,9 @@
             <label>Author</label>
             {{ book_form.author }}
           </div>
-          <input type="submit" class="btn btn-primary" style="margin:20px 120px">
-    </form>
+
+          <input type="submit" class="btn btn-primary">
+        </form>
     </div>
 
 </div>

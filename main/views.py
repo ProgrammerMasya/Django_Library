@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from .models import Book
 from django.http import Http404
-from django.shortcuts import render
+from django.shortcuts import render, redirect, reverse
 from django.views.generic import TemplateView
 from .forms import UserForm, BookCreateForm
 
@@ -52,12 +52,42 @@ class BooksListView(TemplateView):
         except:
             return Http404
         form = BookCreateForm(request.POST)
-
-        form.save(user)
-        form = BookCreateForm()
+        if form.is_valid():
+            form.save(user)
+            form = BookCreateForm()
         args = {
             'user': user,
             'books': Book.objects.filter(user=user),
             'book_form': form,
+        }
+        return render(request, self.template_name, args)
+
+
+class BookEditView(TemplateView):
+
+    template_name = 'edit.html'
+
+    def get(self, request, *args, **kwargs):
+        try:
+            book = Book.objects.get(id=kwargs['id'])
+        except:
+            return Http404
+        form = BookCreateForm(instance=book)
+        args = {
+            'book_form': form,
+        }
+        return render(request, self.template_name, args)
+
+    def post(self, request, *args, **kwargs):
+        try:
+            book = Book.objects.get(id=kwargs['id'])
+        except:
+            return Http404
+        form = BookCreateForm(request.POST, instance=book)
+        if form.is_valid():
+            form.save(book.user)
+            return redirect(reverse('books_list', kwargs={'id': book.user_id}))
+        args = {
+            'book_form': form
         }
         return render(request, self.template_name, args)

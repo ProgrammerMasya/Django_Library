@@ -3,7 +3,7 @@ from .models import Book
 from django.http import Http404
 from django.shortcuts import render
 from django.views.generic import TemplateView
-from .forms import UserForm
+from .forms import UserForm, BookCreateForm
 
 
 class UserListView(TemplateView):
@@ -42,5 +42,22 @@ class BooksListView(TemplateView):
         args = {
             'user': user,
             'books': Book.objects.filter(user=user),
+            'book_form': BookCreateForm(),
+        }
+        return render(request, self.template_name, args)
+
+    def post(self, request, *args, **kwargs):
+        try:
+            user = User.objects.get(id=kwargs['id'])
+        except:
+            return Http404
+        form = BookCreateForm(request.POST)
+
+        form.save(user)
+        form = BookCreateForm()
+        args = {
+            'user': user,
+            'books': Book.objects.filter(user=user),
+            'book_form': form,
         }
         return render(request, self.template_name, args)

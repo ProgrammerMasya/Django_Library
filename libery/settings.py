@@ -77,10 +77,10 @@ WSGI_APPLICATION = 'libery.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'libery_db',
-        'USER': 'masya',
-        'PASSWORD': 'rb,thnhjy2001',
-        'HOST': '127.0.0.1',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        # 'PASSWORD': 'rb,thnhjy2001',
+        'HOST': 'db',
         'PORT': 5432,
     }
 }

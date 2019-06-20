@@ -17,5 +17,7 @@ services:
 
     db:
       image: postgres
+      volumes:
+        - /var/lib/postgresql/data
       expose:
         - 5432

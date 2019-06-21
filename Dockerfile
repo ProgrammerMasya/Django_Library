@@ -9,7 +9,8 @@ RUN apk add --no-cache --virtual .build-deps \
     python3-dev \
     musl-dev \
     postgresql-dev \
-    && pip3 install -r requirements.txt \
+    && pip3 install --no-cache-dir pipenv \
+    && pipenv install --deploy --system \
     && apk del --no-cache .build-deps
 
-CMD ["sh", "db_migrate.sh"]
+CMD ["sh", "docker-entrypoint.sh"]

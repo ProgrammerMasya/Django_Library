@@ -1,25 +1,26 @@
-
 version: '3'
 
-
 services:
-    web:
-      restart: always
-      build:
-        context: .
-      ports:
-       - '8000:8000'
-      depends_on:
-       - db
-      volumes:
-       - .:/src
-      networks:
-       - main
+  web:
+    build:
+      dockerfile: deployment/Dockerfile.prod
+      context: .
+    ports:
+      - '8000:8000'
+    depends_on:
+      - db
+  db:
+    image: "postgres:11-alpine"
+    volumes:
+      - /var/lib/postgresql/10/data
 
-    db:
-      image: postgres
-      networks:
-        - main
-
-networks:
-  main:
+  nginx:
+    build:
+      dockerfile: deployment/nginx/Dockerfile
+      context: .
+    ports:
+      - "80:80"
+    depends_on:
+      - web
+volumes:
+  pgdata:

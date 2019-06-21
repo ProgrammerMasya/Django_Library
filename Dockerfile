@@ -1,13 +1,9 @@
 FROM python:3.7-alpine3.9
 
-COPY docker-entrypoint.sh docker-entrypoint.sh
-
-
-COPY requirements.txt src/
 ADD . /src/
 WORKDIR /src/
 
-RUN apk update && apk add libpq wkhtmltopdf
+RUN apk update && apk add libpq
 RUN apk add --no-cache --virtual .build-deps \
     gcc \
     python3-dev \
@@ -16,4 +12,4 @@ RUN apk add --no-cache --virtual .build-deps \
     && pip3 install -r requirements.txt \
     && apk del --no-cache .build-deps
 
-CMD ["sh", "docker-entrypoint.sh"]
+CMD ["sh", "db_migrate.sh"]

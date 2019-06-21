@@ -7,4 +7,6 @@ until nc -w 1 -z db 5432; do
 done
 >&2 echo "Postgres is up - executing command"
 
+python3 manage.py migrate --noinput
+
 python3 manage.py runserver 0.0.0.0:8000

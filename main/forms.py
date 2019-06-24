@@ -1,13 +1,12 @@
 from django import forms
-from django.contrib.auth.models import User
-from .models import Book
+from .models import Book, UserProfile
 
 
 class UserForm(forms.ModelForm):
 
     class Meta:
-        model = User
-        fields = ('username', 'first_name', 'last_name', 'password')
+        model = UserProfile
+        fields = ('username', 'first_name', 'last_name', 'password', 'image')
 
 
 class BookCreateForm(forms.ModelForm):

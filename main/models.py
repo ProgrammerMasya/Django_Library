@@ -11,3 +11,10 @@ class Book(models.Model):
 
     def get_absolute_url(self):
         return reverse('book_edit', kwargs={'id': self.id})
+
+
+class UserProfile(User):
+    image = models.ImageField(upload_to='profile_image', blank=True)
+
+    def __str__(self):
+        return self.username

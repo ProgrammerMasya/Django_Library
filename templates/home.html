@@ -1,6 +1,6 @@
   
 {% extends 'base.html' %}
-
+{% load static %}
 
 {% block body %}
 <div class="container">
@@ -21,7 +21,7 @@
         </a><br>
     {% endfor %}
     </ul>
-  <div class="card-body" style="align-items: center; justify-content: center; display: flex;">
+  <div class="card-body">
         <form method="post" action="">
           {% csrf_token %}
           <div class="form-group">
@@ -40,7 +40,7 @@
             <label>Password</label>
             {{ user_form.password }}
           </div>
-          <input type="submit" class="btn btn-primary" style="margin:20px 120px" >
+          <input type="submit" class="btn btn-primary">
         </form>
       </div>
 </div>

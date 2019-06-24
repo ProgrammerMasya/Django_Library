@@ -11,9 +11,9 @@ psycopg2 = "==2.8.3"
 pytz = "==2019.1"
 sqlparse = "==0.3.0"
 Django = "==2.2.2"
-python-dotenv = "0.10.3"
-django-extensions = "2.1.9"
-pillow = "6.0.0"
+python-dotenv = "==0.10.3"
+django-extensions = "==2.1.9"
+pillow = "==6.0.0"
 
 [requires]
 python_version = "3.6"

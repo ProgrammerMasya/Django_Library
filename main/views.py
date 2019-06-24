@@ -1,5 +1,4 @@
-from django.contrib.auth.models import User
-from .models import Book
+from .models import Book, UserProfile
 from django.http import Http404
 from django.shortcuts import render, redirect, reverse
 from django.views.generic import TemplateView
@@ -9,7 +8,7 @@ from .forms import UserForm, BookCreateForm
 class UserListView(TemplateView):
 
     template_name = 'home.html'
-    model = User
+    model = UserProfile
 
     def get(self, request, *args, **kwargs):
         args = {
@@ -36,7 +35,7 @@ class BooksListView(TemplateView):
 
     def get(self, request, *args, **kwargs):
         try:
-            user = User.objects.get(id=kwargs['id'])
+            user = UserProfile.objects.get(id=kwargs['id'])
         except:
             return Http404
         args = {
@@ -48,7 +47,7 @@ class BooksListView(TemplateView):
 
     def post(self, request, *args, **kwargs):
         try:
-            user = User.objects.get(id=kwargs['id'])
+            user = UserProfile.objects.get(id=kwargs['id'])
         except:
             return Http404
         form = BookCreateForm(request.POST)

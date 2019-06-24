@@ -14,3 +14,4 @@ RUN apk add --no-cache --virtual .build-deps \
     && apk del --no-cache .build-deps
 
 CMD ["sh", "docker-entrypoint.sh"]
+

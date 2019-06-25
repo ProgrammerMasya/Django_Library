@@ -22,7 +22,9 @@
                 {% else %}
                     {{ user.username }}
                 {% endif %}
-            </a><br>
+            </a>
+            <a href="{{user.id}}/del"><button class="btn btn-danger float-right">Удалить</button></a>
+            <br>
     {% endfor %}
     </ul>
   <div class="card-body">

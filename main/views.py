@@ -18,7 +18,7 @@ class UserListView(TemplateView):
         return render(request, self.template_name, args)
 
     def post(self, request, *args, **kwargs):
-        form = UserForm(request.POST)
+        form = UserForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             form = UserForm()

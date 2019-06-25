@@ -28,6 +28,11 @@ class UserListView(TemplateView):
         }
         return render(request, self.template_name, args)
 
+    def delete(self, id):
+        user = UserProfile.objects.get(id=id)
+        user.delete()
+        return redirect('/')
+
 
 class BooksListView(TemplateView):
 

@@ -8,6 +8,7 @@ urlpatterns = [
     path('', UserListView.as_view(), name='user_list'),
     re_path('(?P<id>\d+)/$', BooksListView.as_view(), name='books_list'),
     re_path('(?P<id>\d+)/edit/$', BookEditView.as_view(), name='book_edit'),
+    re_path('(?P<id>\d+)/del/$', UserListView.delete, name='delete_user'),
 ]
 
 if settings.DEBUG:

@@ -57,6 +57,7 @@ class BooksListView(TemplateView):
             return Http404
         form = BookCreateForm(request.POST)
         if form.is_valid():
+
             form.save(user)
             form = BookCreateForm()
         args = {

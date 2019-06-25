@@ -14,6 +14,7 @@ class Book(models.Model):
 
 
 class UserProfile(User):
+
     image = models.ImageField(upload_to='profile_image', blank=True)
 
     def __str__(self):

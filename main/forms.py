@@ -8,6 +8,16 @@ class UserForm(forms.ModelForm):
         model = UserProfile
         fields = ('username', 'first_name', 'last_name', 'password', 'image')
 
+    def clean(self):
+        username = self.cleaned_data['username']
+        password = self.cleaned_data['password']
+        if len(username) < 5:
+            raise forms.ValidationError('Username не должен быть короче 5 символов')
+        if len(password) < 8:
+            raise forms.ValidationError('Password не должен быть короче 8 символов')
+        if UserProfile.objects.filter(username=username).exists():
+            raise forms.ValidationError('Пользователь с данным логином уже зарегистрирован')
+
 
 class BookCreateForm(forms.ModelForm):
 

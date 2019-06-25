@@ -1,7 +1,7 @@
   
 {% extends 'base.html' %}
 {% load static %}
-
+{% load crispy_forms_tags %}
 {% block body %}
 <div class="container">
 
@@ -30,26 +30,7 @@
   <div class="card-body">
         <form method="post" enctype="multipart/form-data">
           {% csrf_token %}
-          <div class="form-group">
-            <label>Username</label>
-            {{ user_form.username }}
-          </div>
-          <div class="form-group">
-            <label>First name</label>
-            {{ user_form.first_name }}
-          </div>
-          <div class="form-group">
-            <label>Last name</label>
-            {{ user_form.last_name }}
-          </div>
-          <div class="form-group">
-            <label>Password</label>
-            {{ user_form.password }}
-          </div>
-            <div class="form-group">
-            <label>Image</label>
-            {{ user_form.image }}
-          </div>
+          {{ user_form|crispy }}
           <input type="submit" class="btn btn-primary">
         </form>
       </div>

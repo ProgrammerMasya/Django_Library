@@ -13,3 +13,6 @@ if settings.DEBUG:
     urlpatterns = [
         path('__debug__/', include(debug_toolbar.urls)),
 ] + urlpatterns
+
+    def show_toolbar(request):
+        return True

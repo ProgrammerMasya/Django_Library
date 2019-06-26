@@ -84,6 +84,7 @@ class BookEditView(TemplateView):
         return render(request, self.template_name, args)
 
     def post(self, request, *args, **kwargs):
+
         try:
             book = Book.objects.get(id=kwargs['id'])
         except:

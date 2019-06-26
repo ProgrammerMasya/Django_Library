@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from datetime import datetime
 
+CHOICES = [(i,i) for i in range(11)]
+
 
 class Book(models.Model):
 
@@ -13,6 +15,7 @@ class Book(models.Model):
     pages_count = models.IntegerField(default=0)
     created_add = models.DateTimeField(auto_now_add=True)
     updated_add = models.DateTimeField(null=True)
+    amazon_rating = models.PositiveSmallIntegerField(default=0, choices=CHOICES)
 
     def get_absolute_url(self):
         return reverse('book_edit', kwargs={'id': self.id})

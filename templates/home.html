@@ -28,12 +28,15 @@
     {% endfor %}
     </ul>
   <div class="card-body">
+
         <form method="post" enctype="multipart/form-data">
           {% csrf_token %}
           {{ user_form|crispy }}
           <input type="submit" class="btn btn-primary">
         </form>
+
       </div>
+
 </div>
 
 {% endblock %}

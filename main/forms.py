@@ -7,6 +7,9 @@ class UserForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = ('username', 'first_name', 'last_name', 'password', 'image')
+        help_texts = {
+            'username': None,
+        }
 
     def clean(self):
         username = self.cleaned_data['username']
@@ -23,7 +26,7 @@ class BookCreateForm(forms.ModelForm):
 
     class Meta:
         model = Book
-        fields = ('name', 'author')
+        fields = ('name', 'author', 'price', 'pages_count')
 
     def save(self, user):
         book = super(BookCreateForm, self).save(commit=False)

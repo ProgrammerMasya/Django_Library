@@ -11,7 +11,7 @@
   <p></p>
     <ul class="list-group">
     <li class="list-group-item disabled">Users</li>
-    {% for user in users %}
+    {% for user in users.object_list %}
         <li class="list-group-item">
         {% if user.image %}
             <p><img src="{{ user.image.url }}" width="240"></p>
@@ -27,13 +27,41 @@
             <br>
     {% endfor %}
     </ul>
+    <br>
+    <nav aria-label="...">
+  <ul class="pagination justify-content-center">
+    <li class="page-item {% if not prev_url %} disabled {% endif %}">
+      <a class="page-link" href="{{ prev_url }}" tabindex="-1">Previous</a>
+    </li>
+
+      {% for n in users.paginator.page_range %}
+
+        {% if users.number == n %}
+            <li class="page-item active">
+                 <a class="page-link" href="?page={{ n }}">{{ n }}<span class="sr-only">(current)</span></a>
+            </li>
+        {% elif n > users.number|add:-3 and n < users.number|add:3 %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ n }}">{{ n }}</a>
+        </li>
+      {% endif %}
+      {% endfor %}
+    <li class="page-item {% if not next_url %} disabled {% endif %}">
+      <a class="page-link" href="{{ next_url }}" tabindex="-1">Next</a>
+    </li>
+  </ul>
+</nav>
   <div class="card-body">
+
         <form method="post" enctype="multipart/form-data">
           {% csrf_token %}
           {{ user_form|crispy }}
           <input type="submit" class="btn btn-primary">
         </form>
+
       </div>
+
+
 </div>
 
 {% endblock %}

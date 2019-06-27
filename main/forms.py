@@ -22,6 +22,16 @@ class UserForm(forms.ModelForm):
             raise forms.ValidationError('Пользователь с данным логином уже зарегистрирован')
 
 
+class UserEditForm(forms.ModelForm):
+
+    class Meta:
+        model = UserProfile
+        fields = ('username', 'first_name', 'last_name')
+        help_texts = {
+            'username': None,
+        }
+
+
 class BookCreateForm(forms.ModelForm):
 
     class Meta:

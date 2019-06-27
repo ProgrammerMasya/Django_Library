@@ -2,7 +2,7 @@ from .models import Book, UserProfile
 from django.http import Http404
 from django.shortcuts import render, redirect, reverse
 from django.views.generic import TemplateView
-from .forms import UserForm, BookCreateForm
+from .forms import UserForm, BookCreateForm, UserEditForm
 from django.core.paginator import Paginator
 
 
@@ -118,5 +118,35 @@ class BookEditView(TemplateView):
             return redirect(reverse('books_list', kwargs={'id': book.user_id}))
         args = {
             'book_form': form
+        }
+        return render(request, self.template_name, args)
+
+
+class UserEditView(TemplateView):
+
+    template_name = 'edit_user.html'
+
+    def get(self, request, *args, **kwargs):
+        try:
+            user = UserProfile.objects.get(id=kwargs['id'])
+        except:
+            return Http404
+        form = UserEditForm(instance=user)
+        args = {
+            'user_form': form,
+        }
+        return render(request, self.template_name, args)
+
+    def post(self, request, *args, **kwargs):
+        try:
+            user = UserProfile.objects.get(id=kwargs['id'])
+        except:
+            return Http404
+        form = UserEditForm(request.POST, request.FILES, instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect(reverse('user_list'))
+        args = {
+            'user_form': form
         }
         return render(request, self.template_name, args)

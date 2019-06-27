@@ -23,7 +23,8 @@
                     {{ user.username }}
                 {% endif %}
             </a>
-            <a href="{{user.id}}/del"><button class="btn btn-danger float-right">Удалить</button></a>
+            <a href="{{user.id}}/del"><button class="btn btn-danger float-right">Delete</button></a>
+            <a href="{{ user.get_absolute_url }}"><button class="btn btn-secondary float-right">Edit</button></a>
             <br>
     {% endfor %}
     </ul>

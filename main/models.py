@@ -32,3 +32,6 @@ class UserProfile(User):
 
     def __str__(self):
         return self.username
+
+    def get_absolute_url(self):
+        return reverse('user_edit', kwargs={'id': self.id})

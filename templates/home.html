@@ -16,13 +16,16 @@
         {% if user.image %}
             <p><img src="{{ user.image.url }}" width="240"></p>
         {% endif %}
-            <a href="/{{ user.id }}">
+            <a href="{{ user.id }}">
                 {% if user.get_full_name %}
                     {{ user.get_full_name }}
                 {% else %}
                     {{ user.username }}
                 {% endif %}
             </a>
+        {% if user.book__price__avg %}
+            <p>Average book price: {{ user.book__price__avg }}</p>
+        {% endif %}
             <a href="{{user.id}}/del"><button class="btn btn-danger float-right">Delete</button></a>
             <a href="{{ user.get_absolute_url }}"><button class="btn btn-secondary float-right">Edit</button></a>
             <br>

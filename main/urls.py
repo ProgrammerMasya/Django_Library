@@ -5,11 +5,11 @@ from django.conf.urls.static import static
 from .views import UserListView, BooksListView, BookEditView, UserEditView
 
 urlpatterns = [
-    path('', UserListView.as_view(), name='user_list'),
-    re_path('(?P<id>\d+)/$', BooksListView.as_view(), name='books_list'),
-    re_path('(?P<id>\d+)/edit/$', BookEditView.as_view(), name='book_edit'),
-    re_path('(?P<id>\d+)/del/$', UserListView.delete, name='delete_user'),
-    re_path('(?P<id>\d+)/edit_user/$', UserEditView.as_view(), name='user_edit')
+    path('users/', UserListView.as_view(), name='user_list'),
+    re_path('users/(?P<id>\d+)/$', BooksListView.as_view(), name='books_list'),
+    re_path('book/(?P<id>\d+)/edit/$', BookEditView.as_view(), name='book_edit'),
+    re_path('book/(?P<id>\d+)/del/$', UserListView.delete, name='delete_user'),
+    re_path('user/(?P<id>\d+)/edit_user/$', UserEditView.as_view(), name='user_edit')
 ]
 
 if settings.DEBUG:

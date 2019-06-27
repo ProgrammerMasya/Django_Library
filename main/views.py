@@ -5,6 +5,8 @@ from django.views.generic import TemplateView
 from .forms import UserForm, BookCreateForm, UserEditForm
 from django.core.paginator import Paginator
 from django.db.models import Avg
+from django.db.models.functions import Round
+
 
 
 class UserListView(TemplateView):
@@ -13,7 +15,7 @@ class UserListView(TemplateView):
     model = UserProfile
 
     def get(self, request, *args, **kwargs):
-        users = self.model.objects.all().annotate(Avg('book__price'))
+        users = self.model.objects.all().annotate(avg_price=Round(Avg('book__price')))
         print(vars(users))
         paginator = Paginator(users, 5)
         page_number = request.GET.get('page', 1)
@@ -40,7 +42,7 @@ class UserListView(TemplateView):
 
     def post(self, request, *args, **kwargs):
         form = UserForm(request.POST, request.FILES)
-        users = self.model.objects.all().annotate(Avg('book__price'))
+        users = self.model.objects.all().annotate(avg_price=Round(Avg('book__price')))
         paginator = Paginator(users, 5)
         page_number = request.GET.get('page', 1)
         page = paginator.get_page(page_number)

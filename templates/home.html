@@ -23,8 +23,8 @@
                     {{ user.username }}
                 {% endif %}
             </a>
-        {% if user.book__price__avg %}
-            <p>Average book price: {{ user.book__price__avg }}</p>
+        {% if user.avg_price %}
+            <p>Average book price: {{ user.avg_price }}</p>
         {% endif %}
             <a href="{{user.id}}/del"><button class="btn btn-danger float-right">Delete</button></a>
             <a href="{{ user.get_absolute_url }}"><button class="btn btn-secondary float-right">Edit</button></a>

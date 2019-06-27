@@ -8,6 +8,13 @@ from django.db.models import Avg
 from django.db.models.functions import Round
 
 
+class BaseView(TemplateView):
+
+    template_name = 'base.html'
+
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name)
+
 
 class UserListView(TemplateView):
 
@@ -49,6 +56,7 @@ class UserListView(TemplateView):
         if form.is_valid():
             form.save()
             form = UserForm()
+            return redirect(reverse('user_list'))
         args = {
             'users': page,
             'user_form': form,

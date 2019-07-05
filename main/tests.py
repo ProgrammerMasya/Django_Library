@@ -1,5 +1,4 @@
 from django.test import TestCase
-
 from django.contrib.auth.models import User
 from django.urls import reverse
 
@@ -63,4 +62,5 @@ class AnimalTestCase(TestCase):
         response = self.client.get(reverse('user_list'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'home.html')
+
 
